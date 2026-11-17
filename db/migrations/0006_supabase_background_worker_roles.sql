@@ -1,0 +1,43 @@
+-- ============================================================================
+-- AI Presentation Platform — Supabase deployment migration (0006)
+-- Adds the background job worker: real atomic claim/lease/retry/quarantine
+-- state machine for crash recovery, independent of any live HTTP request.
+-- ============================================================================
+
+-- --- Test-fixture grants on the webhook role (used only by
+-- --- server/http/test-worker-recovery.ts to set up/tear down synthetic
+-- --- jobs - the webhook HANDLER itself never touches jobs at all) --------
+GRANT INSERT, UPDATE ON ai_presentation.jobs TO ai_presentation_webhook;
+GRANT DELETE ON ai_presentation.jobs TO ai_presentation_webhook; -- (if not already granted in 0005)
+
+-- ============================================================================
+-- Manual step, NOT run by this file (contains a generated secret - never
+-- commit real credentials to a migration): a FOURTH dedicated role, kept
+-- separate from ai_presentation_app/webhook, for the background worker.
+-- BYPASSRLS because the worker claims jobs across ALL users, not one
+-- authenticated request - there is no single auth.uid() to scope RLS to.
+--
+--   CREATE ROLE ai_presentation_worker LOGIN PASSWORD '<generated>'
+--     NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION BYPASSRLS
+--     CONNECTION LIMIT 5;
+--   GRANT USAGE ON SCHEMA ai_presentation TO ai_presentation_worker;
+--   GRANT CONNECT ON DATABASE postgres TO ai_presentation_worker;
+--   GRANT SELECT, UPDATE ON ai_presentation.jobs TO ai_presentation_worker;
+--   GRANT SELECT, INSERT ON ai_presentation.generated_assets TO ai_presentation_worker;
+--   GRANT SELECT ON ai_presentation.projects, ai_presentation.design_specs,
+--     ai_presentation.entitlements TO ai_presentation_worker;
+--
+-- Already applied to the live project. WORKER_DATABASE_URL in .env.local
+-- uses this role via the same Supavisor pooler as the other two, with its
+-- own distinct password.
+--
+-- The worker ALSO needs SUPABASE_SERVICE_ROLE_KEY to complete a job's
+-- storage upload when there is no live user session to act on behalf of
+-- (true crash recovery, or any retry that happens later than the original
+-- request's token would survive). This key is NOT configured in this
+-- environment - the worker still claims/leases/retries/quarantines jobs
+-- correctly without it (see server/http/test-worker-recovery.ts, 15/15
+-- live assertions), it just cannot finish the upload step, which is a
+-- real, observable exercise of the retry mechanism rather than a silent
+-- failure. See docs/BLOCKERS.md.
+-- ============================================================================

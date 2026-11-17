@@ -1,0 +1,6 @@
+<templates xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" version="v1" status="experimental-not-desktop-approved">
+ <effect id="fade"><p:transition spd="med" advClick="1"><p:fade/></p:transition></effect>
+ <effect id="wipe"><p:transition spd="med" advClick="1"><p:wipe dir="r"/></p:transition></effect>
+ <effect id="push"><p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition></effect>
+ <effect id="zoom"><p:transition spd="med" advClick="1"><p:zoom dir="in"/></p:transition></effect>
+</templates>

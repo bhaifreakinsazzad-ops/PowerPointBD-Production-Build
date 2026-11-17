@@ -1,0 +1,37 @@
+{
+  "name": "ai-presentation-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:development": "tailwindcss -i src/styles.css -o public/styles.css --minify && node scripts/build.mjs --development",
+    "test": "node --test tests/*.test.mjs",
+    "lint": "node --check src/prototype.js && node --check src/accessibility.js",
+    "dev": "node scripts/serve.mjs",
+    "typecheck:studio": "tsc --noEmit -p tsconfig.studio.json",
+    "test:puter": "node --import tsx --test tests/puter-client.test.ts",
+    "test:studio:browser": "node scripts/build-browser-harness.mjs && playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/three": "0.186.0",
+    "esbuild": "0.28.2",
+    "happy-dom": "21.0.4",
+    "tailwindcss": "3.4.17"
+  },
+  "dependencies": {
+    "@heyputer/puter.js": "2.6.5",
+    "@supabase/supabase-js": "2.118.0",
+    "animejs": "4.5.0",
+    "jspdf": "^4.2.1",
+    "mammoth": "^1.13.0",
+    "motion": "^14.6.0",
+    "pptxgenjs": "^4.0.1",
+    "three": "0.186.1"
+  },
+  "overrides": {
+    "postal-mime": "4.1.4",
+    "postcss-selector-parser": "7.1.6"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "policy_version": "phase0-experimental-v1",
+  "template_version": "v1",
+  "production_enabled": false,
+  "desktop_qa": "UNVERIFIED",
+  "smooth_roles": ["title", "image", "quote", "closing"],
+  "role_policy_status": "PROVISIONAL_SOURCE_TABLE_SUMMARY_CONFLICT",
+  "high_bullet_policy": "PROVISIONAL_TITLE_ONLY_ABOVE_SIX",
+  "max_entrances_per_slide": 5,
+  "transitions": {"fade": {"production_enabled": false}, "wipe": {"production_enabled": false}, "push": {"production_enabled": false}, "zoom": {"production_enabled": false}},
+  "entrances": {"fade": {"production_enabled": false}, "wipe": {"production_enabled": false}, "zoom": {"production_enabled": false}, "slide_in": {"production_enabled": false}}
+}

@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.local
+*.log
+phase0_artifacts/
+dist/
+.DS_Store
+.anchor/
+__pycache__/
+frontend/.test-output/
+frontend/playwright-report/
+*.pyc
+artifacts_reverify/
+.storage/
+.vercel/
+
+.vercel

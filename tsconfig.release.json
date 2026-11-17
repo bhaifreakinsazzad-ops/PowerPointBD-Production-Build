@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext", "moduleResolution": "NodeNext",
+    "rootDir": ".", "outDir": "dist/release", "noEmit": false,
+    "rewriteRelativeImportExtensions": true, "declaration": false,
+    "sourceMap": false, "noEmitOnError": true
+  },
+  "include": ["server/http/server.ts", "server/http/worker.ts"]
+}

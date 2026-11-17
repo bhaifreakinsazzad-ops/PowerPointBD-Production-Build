@@ -1,0 +1,4 @@
+interface:
+  display_name: "PowerPointBD Puter Studio"
+  short_description: "Build Puter AI and interactive presentation tools"
+  default_prompt: "Use $powerpointbd-puter-studio to extend the real AI drafting and 3D storyboard workflows in PowerPointBD."

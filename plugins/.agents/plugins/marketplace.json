@@ -1,0 +1,20 @@
+{
+  "name": "powerpointbd-local",
+  "interface": {
+    "displayName": "PowerPointBD Local"
+  },
+  "plugins": [
+    {
+      "name": "powerpointbd-studio-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./powerpointbd-studio-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

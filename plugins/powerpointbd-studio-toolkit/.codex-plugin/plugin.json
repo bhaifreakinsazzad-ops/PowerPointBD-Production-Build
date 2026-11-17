@@ -1,0 +1,15 @@
+{
+  "name": "powerpointbd-studio-toolkit",
+  "version": "0.1.0",
+  "description": "Development guidance for Puter AI, anime.js and Three.js in PowerPointBD. No hosted MCP server or account access.",
+  "skills": "./skills",
+  "interface": {
+    "displayName": "PowerPointBD Studio Toolkit",
+    "shortDescription": "Puter AI and 3D studio tools",
+    "longDescription": "Reusable local development workflow for validated Puter content, accessible anime.js motion and Three.js storyboards.",
+    "developerName": "PowerPointBD",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Extend PowerPointBD with real Puter AI and accessible interactive storyboards."
+  }
+}

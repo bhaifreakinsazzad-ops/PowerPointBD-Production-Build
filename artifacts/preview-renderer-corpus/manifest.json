@@ -1,0 +1,13 @@
+{
+  "scope": "LOCAL REAL RENDERER TEST CORPUS; NOT LIVE CUSTOMER PREVIEW",
+  "renderer": "LibreOffice 26.8.1.1 bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1",
+  "template": "corporate_slate-v1",
+  "pptx_sha256": "8e94a552ca8c57efd92e5558a5726609e332c1e65fdc5384dd7f2a30d0690484",
+  "page_sha256": [
+    "65decd1fb5d44ba23bfbf45814c6e39262eea649c1d346a08f2493f72808ecec",
+    "a2843b6b462f6e4db9488710f24c97e31648b380fa1c6bc550c82f43fcaed019",
+    "6a41af996a908dce507542a2d6b81130bf3982e0455d853f82622d007c8fee84"
+  ],
+  "slide_count": 3,
+  "desktop_powerpoint": "UNVERIFIED"
+}

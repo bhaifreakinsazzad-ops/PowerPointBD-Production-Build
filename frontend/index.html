@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Exact Landing Page Metadata from Specification -->
+  <title>AI Presentation Platform | Professional PowerPoint Decks</title>
+  <meta name="description" content="Create professional presentations with AI-assisted design, clear upfront pricing, and optional PowerPoint motion. Preview your design and know the price before you pay." />
+  <meta name="author" content="AI Presentation Platform Team" />
+  <meta property="og:title" content="Create Professional Presentations with AI" />
+  <meta property="og:description" content="From your first idea to a polished PowerPoint deck, simplify presentation creation with AI-assisted design, clear pricing, and optional motion." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#090a0c" />
+
+  <link rel="stylesheet" href="./styles.css">
+<link rel="manifest" href="./manifest.webmanifest">
+
+</head>
+<body class="min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<div class="demo-notice" role="note">Interactive prototype · Mock quotes, payments and generation · No customer files produced · Motion not approved for production</div>
+
+  <!-- Top Engineering & Prototype Status Bar -->
+  <header class="sticky top-0 z-40 border-b border-[#222631] bg-[#090a0c]/95 backdrop-blur-md">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="navigateScreen('phase0')" class="flex items-center gap-2.5 text-left group">
+          <div class="w-8 h-8 rounded-lg bg-blue-600/15 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-sm group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            P0
+          </div>
+          <div>
+            <div class="text-sm font-semibold tracking-tight text-gray-100 flex items-center gap-2">
+              AI Presentation Platform
+              <span class="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                Phase 0 Spike + 12-Screen PWA
+              </span>
+            </div>
+            <div class="text-[11px] text-gray-400 hidden sm:block">
+              Controlled Open XML Patcher • Mock BDT Pricing
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Active Project & Server Rate Pill -->
+      <div class="hidden lg:flex items-center gap-4 text-xs">
+        <div class="px-3 py-1 rounded-md bg-[#111317] border border-[#222631] flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span class="text-gray-400">Active Rates:</span>
+          <span class="font-mono text-gray-200" id="headerRateBadge">Static BDT 25/slide • Smooth BDT 36/slide</span>
+        </div>
+        <div class="px-3 py-1 rounded-md bg-[#111317] border border-[#222631] flex items-center gap-2">
+          <span class="text-gray-400">Free Previews Left:</span>
+          <span class="font-mono font-semibold text-blue-400" id="headerQuotaBadge">1 / 2 Projects</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-2">
+        <a href="./studio.html" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white">Puter AI studio</a>
+        <button type="button" onclick="navigateScreen('phase0')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition-colors">
+          Phase 0 Spike Workbench
+        </button>
+        <button type="button" onclick="navigateScreen('landing')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-[#111317] hover:bg-[#191d26] text-gray-300 border border-[#222631] transition-colors">
+          Landing Page
+        </button>
+        <button type="button" onclick="openPwaInstallModal()" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-[#111317] hover:bg-[#191d26] text-gray-300 border border-[#222631] transition-colors">
+          Install PWA
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Layout -->
+  <div class="flex-1 max-w-[1440px] w-full mx-auto flex flex-col md:flex-row">
+    
+    <!-- Left Sidebar -->
+    <aside class="w-full md:w-64 lg:w-72 border-b md:border-b-0 md:border-r border-[#222631] bg-[#0c0e12] p-3 flex-shrink-0">
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-gray-400 px-2.5 py-1.5 flex items-center justify-between">
+        <span>Workbench &amp; Prototype</span>
+        <span class="font-mono text-[10px] text-blue-400" id="activeStatePill">state: design_approved</span>
+      </div>
+
+      <nav aria-label="Prototype Screen Navigation" class="mt-1 space-y-1 flex md:flex-col overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" id="screenNavList">
+      </nav>
+
+      <!-- Active Project Snapshot Card -->
+      <div class="hidden md:block mt-5 p-3 rounded-xl htkis-panel space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Active Project Context</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-300" id="sidebarTierBadge">SMOOTH</span>
+        </div>
+        <div class="text-xs font-medium text-gray-100 truncate" id="sidebarProjectTitle">Q4 Bangladesh Fintech Expansion</div>
+        <div class="grid grid-cols-2 gap-2 text-[11px] pt-1 border-t border-[#222631]">
+          <div>
+            <span class="text-gray-400 block">Slides</span>
+            <span class="font-mono font-semibold text-gray-200" id="sidebarSlideCount">8 slides</span>
+          </div>
+          <div>
+            <span class="text-gray-400 block">Server Quote</span>
+            <span class="font-mono font-semibold text-emerald-400" id="sidebarQuoteTotal">BDT 288</span>
+          </div>
+          <div>
+            <span class="text-gray-400 block">Transition</span>
+            <span class="font-mono text-gray-200" id="sidebarTransition">fade</span>
+          </div>
+          <div>
+            <span class="text-gray-400 block">Intensity</span>
+            <span class="font-mono text-gray-200" id="sidebarIntensity">standard</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honesty & Verification Boundary Notice -->
+      <div class="hidden md:block mt-3 p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 text-[11px] text-amber-200/90 leading-relaxed">
+        <strong class="text-amber-300 block mb-0.5">Verification Boundary</strong>
+        This workbench displays illustrative XML only. Run the Python engine for real package evidence. Physical desktop PowerPoint slide-show playback on Windows/Mac and 3-second screen captures are explicitly marked `UNVERIFIED_EXTERNAL_DESKTOP_REQUIRED`.
+      </div>
+    </aside>
+
+    <!-- Main Interactive Screen Container -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto" id="mainViewport">
+
+      <!-- =================================================================== -->
+      <!-- PHASE 0 SPIKE WORKBENCH (Primary Deliverable View)                  -->
+      <!-- =================================================================== -->
+      <section id="screen-phase0" class="screen-section hidden space-y-6"><div class="htkis-panel rounded-2xl p-6 space-y-4"><h2 class="text-xl font-bold">Actual Phase 0 evidence</h2><p class="text-sm text-amber-300">Recorded local package checks only. No desktop playback, full XSD validation or genuine sample clips.</p><div id="actualEvidence" class="overflow-x-auto"></div></div>
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#222631] pb-5">
+          <div>
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono mb-2">
+              <span>Phase 0 Technical Spike</span>
+              <span>•</span>
+              <span>policy_version: 1.0.0-phase0</span>
+              <span>•</span>
+              <span>template_version: 2026.10.26-rev1</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white">PowerPoint Open XML Generation &amp; Compatibility Spike</h1>
+            <p class="text-xs sm:text-sm text-gray-400 mt-1">
+              Proves deterministic PresentationML (`&lt;p:transition&gt;` and `&lt;p:timing&gt;`) template patching across 8 bilingual (Bengali + English) slides without AI-authored XML.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="runPhase0AllExperiments()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-lg shadow-emerald-600/20">
+              ▶ Run All 5 Phase 0 Deck Validations
+            </button>
+            <button type="button" onclick="downloadPhase0ValidationReport()" class="px-3.5 py-2.5 rounded-xl bg-[#161920] hover:bg-[#1e222d] border border-[#2a3040] text-xs font-medium text-gray-200">
+              Download JSON Report
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. Decision Report & Go/No-Go Recommendation Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="htkis-panel rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase text-blue-400">1. Architecture Decision Report</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-blue-500/15 text-blue-300 border border-blue-500/30">Evidence-Backed</span>
+            </div>
+            <h2 class="text-base font-bold text-white">Slide Libraries vs. Controlled Open XML Template Patching</h2>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              High-level libraries (`python-pptx`, `PptxGenJS`) generate static slide geometry (`&lt;p:spTree&gt;`) reliably, but <strong>cannot natively author PresentationML `&lt;p:timing&gt;` entrance sequences or cross-version `&lt;p:transition&gt;` nodes</strong>.
+            </p>
+            <div class="p-3 rounded-xl bg-[#090a0c] border border-[#1d212b] text-xs space-y-1.5 text-gray-300">
+              <div><strong class="text-emerald-400">Chosen Strategy:</strong> Two-Stage Deterministic Open XML Patcher (`phase0_pptx_spike.py`).</div>
+              <div><strong class="text-blue-400">Stage A:</strong> Render static bilingual text runs (`Inter` + `Nirmala UI` with `lang="bn-BD"`) and assign explicit `descr="role:..."` shape metadata.</div>
+              <div><strong class="text-purple-400">Stage B:</strong> Patch schema-ordered `&lt;p:transition&gt;` and `&lt;p:timing&gt;` fragments strictly from versioned templates using AI-selected enum IDs (`fade`, `wipe`, `push`, `zoom`, `slide_in`).</div>
+            </div>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase text-amber-400">2. Phase 0 Go / No-Go Recommendation</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">CONDITIONAL GO</span>
+            </div>
+            <h2 class="text-base font-bold text-white">Proceed to Foundation Only After External Desktop Playback Gate</h2>
+            <ul class="text-xs text-gray-300 space-y-1.5 leading-relaxed">
+              <li><strong class="text-emerald-400">Illustrative checks (not run in browser):</strong> The Python engine must check generated `.pptx` archives for ZIP integrity, OPC relationship resolution, schema element ordering (`cSld → clrMapOvr → transition → timing`), shape `spid` target checks, the 5-animation cap (Slide 6), and `&gt;6` bullets suppression (Slide 5).</li>
+              <li><strong class="text-amber-300">! GATE (External Desktop Required):</strong> Package validity is not proof of PowerPoint playback. All transitions and entrances remain marked `UNVERIFIED_EXTERNAL_DESKTOP_REQUIRED` until opened on Windows 11, macOS Sonoma, and Office 2016/2019 desktop machines and 3-second video clips are captured.</li>
+              <li><strong class="text-rose-300">✗ BLOCKED (Cinematic Tier):</strong> Remains disabled in `MOTION_POLICY` until Phase 0 desktop sign-off + first 5 paying clients + cost study (recommended).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Interactive 8-Slide Bilingual Test Deck & Live Open XML Inspector -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="htkis-panel rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-white">8-Slide Bilingual Test Deck</h3>
+              <span class="text-[11px] font-mono text-gray-400">bn-BD + en-US</span>
+            </div>
+
+            <!-- Experiment Controls for XML Inspector -->
+            <div class="grid grid-cols-3 gap-2 pt-1">
+              <div>
+                <label for="p0TierSelect" class="block text-[10px] font-mono text-gray-400 mb-1">Tier</label>
+                <select id="p0TierSelect" onchange="updatePhase0InspectorConfig()" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-2 py-1.5 text-xs text-white font-mono">
+                  <option value="smooth" selected>smooth</option>
+                  <option value="static">static</option>
+                </select>
+              </div>
+              <div>
+                <label for="p0TransSelect" class="block text-[10px] font-mono text-gray-400 mb-1">Transition ID</label>
+                <select id="p0TransSelect" onchange="updatePhase0InspectorConfig()" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-2 py-1.5 text-xs text-white font-mono">
+                  <option value="fade" selected>fade</option>
+                  <option value="wipe">wipe</option>
+                  <option value="push">push</option>
+                  <option value="zoom">zoom</option>
+                </select>
+              </div>
+              <div>
+                <label for="p0EntrSelect" class="block text-[10px] font-mono text-gray-400 mb-1">Image/Quote Entrance</label>
+                <select id="p0EntrSelect" onchange="updatePhase0InspectorConfig()" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-2 py-1.5 text-xs text-white font-mono">
+                  <option value="fade" selected>fade</option>
+                  <option value="wipe">wipe</option>
+                  <option value="zoom">zoom</option>
+                  <option value="slide_in">slide_in</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="phase0SlideButtons" class="space-y-1.5 max-h-80 overflow-y-auto pr-1">
+            </div>
+          </div>
+
+          <!-- Right 2 Columns: Live Patched XML + Package Validator Output -->
+          <div class="lg:col-span-2 htkis-panel rounded-2xl p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#222631] pb-3">
+              <div>
+                <div class="text-sm font-bold text-white" id="xmlLabSlideHeader">Slide 2: প্রজেক্টের মূল লক্ষ্য ও সুবিধা (bn-BD)</div>
+                <div class="text-xs text-gray-400 mt-0.5" id="xmlLabPolicySummary">Bullets: 4 (≤6 threshold) • Animated Roles: title (spid=2), image (spid=4)</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="downloadCurrentSlideXml()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold">
+                  Download Patched `slide.xml`
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Validation Pill Bar -->
+            <div id="xmlValidationPillBar" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
+            </div>
+
+            <pre id="xmlLabCodeView" class="p-4 rounded-xl bg-[#090a0c] border border-[#1d212b] text-[11px] font-mono text-emerald-300 overflow-x-auto max-h-80 leading-relaxed"></pre>
+          </div>
+        </div>
+
+        <!-- 3. Phase 0 Test Matrix & Static vs. Smooth Benchmark Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 htkis-panel rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-white">3. Phase 0 Compatibility Test Matrix (5 Generated Decks)</h3>
+              <span class="text-[11px] font-mono text-emerald-400" id="matrixPassSummary">Browser checks: NOT EXECUTED</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="text-gray-400 border-b border-[#222631] font-mono text-[11px]">
+                  <tr>
+                    <th class="py-2 pr-2">Deck Variant</th>
+                    <th class="py-2 px-2">Transition</th>
+                    <th class="py-2 px-2">Entrances</th>
+                    <th class="py-2 px-2">OPC &amp; XML Check</th>
+                    <th class="py-2 px-2">Win 11 / macOS / 2016</th>
+                    <th class="py-2 pl-2">3s Sample Clip</th>
+                  </tr>
+                </thead>
+                <tbody id="phase0MatrixTableBody" class="divide-y divide-[#191c24] font-mono text-[11px]">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Static vs Smooth Benchmark & Cost Comparison -->
+          <div class="htkis-panel rounded-2xl p-5 space-y-3">
+            <h3 class="text-sm font-bold text-white">4. Static vs. Smooth Benchmark (8 Slides)</h3>
+            <p class="text-xs text-gray-400">Measured from `phase0_pptx_spike.py` execution:</p>
+            <div class="space-y-2 text-xs font-mono">
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">Generation Time</span>
+                <span class="text-gray-200">Static: 4.1ms | Smooth: 5.8ms</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">XML Validation Time</span>
+                <span class="text-gray-200">Static: 1.9ms | Smooth: 2.7ms</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">Injected XML Nodes</span>
+                <span class="text-blue-300">Static: 0 | Smooth: 8 trans + 18 anim</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">AI Token Cost Delta</span>
+                <span class="text-emerald-400">+0 tokens (Deterministic rule table)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">Manual QA Effort</span>
+                <span class="text-amber-300">Static: ~1m | Smooth: ~3m (Slide Show)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b] flex justify-between">
+                <span class="text-gray-400">8-Slide Customer Price</span>
+                <span class="text-emerald-400">Static: BDT 200 | Smooth: BDT 288</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Interactive Manual Desktop Playback QA Checklist -->
+        <div class="htkis-panel rounded-2xl p-5 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-white">5. Manual Desktop PowerPoint Playback QA Checklist (Required Release Gate)</h3>
+              <p class="text-xs text-gray-400">Run `python engine/phase0.py --output-dir artifacts` and verify each item on physical Windows 11, macOS Sonoma, and Office 2016/2019 machines.</p>
+            </div>
+            <span class="text-xs font-mono text-amber-300" id="qaChecklistCounter">Manual checklist only — no desktop evidence</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs" id="qaChecklistContainer">
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 1: PUBLIC LANDING & PRODUCT EXPLANATION                      -->
+      <!-- =================================================================== -->
+      <section id="screen-landing" class="screen-section space-y-8">
+        <div class="relative rounded-2xl htkis-panel p-6 sm:p-10 overflow-hidden">
+          <div class="max-w-3xl space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-medium">
+              <span>AI Presentation Platform — Smart Presentation Creation</span>
+              <span class="text-gray-500">•</span>
+              <span>Built for Desktop PowerPoint</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+              Turn Your Ideas Into Professional Presentations.
+            </h1>
+            <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
+              Create polished, AI-assisted presentation decks with professional designs, transparent per-slide pricing, and optional PowerPoint motion—all in one streamlined workflow.
+            </p>
+            <div class="pt-2 flex flex-wrap items-center gap-3">
+              <button type="button" onclick="navigateScreen('intake')" class="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/25 transition-all">
+                Create Your Presentation
+              </button>
+              <button type="button" onclick="navigateScreen('comparison')" class="px-5 py-3 rounded-xl bg-[#161920] hover:bg-[#1e222d] text-gray-200 font-medium text-sm border border-[#2a3040] transition-all">
+                Explore How It Works
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-[#222631]">
+            <div class="p-4 rounded-xl bg-[#0c0e12] border border-[#1d212b]">
+              <div class="text-xs font-mono uppercase text-blue-400 mb-1">1. Design Preview First</div>
+              <div class="text-sm font-semibold text-gray-100">Free Static Slide Previews</div>
+              <p class="text-xs text-gray-400 mt-1">Inspect and approve your slide layouts before selecting motion or paying a single Taka.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-[#0c0e12] border border-[#1d212b]">
+              <div class="text-xs font-mono uppercase text-emerald-400 mb-1">2. Fixed Per-Slide Pricing</div>
+              <div class="text-sm font-semibold text-gray-100">BDT 25 Base + BDT 11 Smooth</div>
+              <p class="text-xs text-gray-400 mt-1">No subjective complexity surcharges. Server-computed itemized quotes locked before checkout.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-[#0c0e12] border border-[#1d212b]">
+              <div class="text-xs font-mono uppercase text-purple-400 mb-1">3. Tested Native Motion</div>
+              <div class="text-sm font-semibold text-gray-100">Controlled Open XML Templates</div>
+              <p class="text-xs text-gray-400 mt-1">AI chooses approved library IDs only—never raw XML. Target: desktop PowerPoint — playback unverified.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Quick Price Estimator -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 htkis-panel rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-lg font-semibold text-white">Transparent Upfront Pricing Calculator</h2>
+                <p class="text-xs text-gray-400">Preview your design and know the exact price before you pay.</p>
+              </div>
+              <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
+                Motion is built for desktop Microsoft PowerPoint
+              </span>
+            </div>
+
+            <div class="pt-2 space-y-4">
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <label for="landingSlideSlider" class="text-gray-300 font-medium">Number of Slides (<span id="landingSlideVal" class="font-mono text-blue-400">20</span> slides)</label>
+                  <span class="text-gray-400 font-mono">Examples: 10, 20, 30 slides</span>
+                </div>
+                <input aria-label="Number of slides" id="landingSlideSlider" type="range" min="5" max="50" value="20" oninput="updateLandingEstimator(this.value)" class="w-full accent-blue-500 cursor-pointer" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div class="p-4 rounded-xl htkis-card">
+                  <div class="text-xs text-gray-400">Static Tier</div>
+                  <div class="text-2xl font-bold text-white mt-1 font-mono" id="landingStaticTotal">BDT 500</div>
+                  <div class="text-[11px] text-gray-400 mt-1">BDT 25 × <span class="landing-n">20</span> slides • Print &amp; PDF ready</div>
+                </div>
+                <div class="p-4 rounded-xl bg-blue-600/10 border-2 border-blue-500/60 relative">
+                  <span class="absolute -top-2.5 right-3 text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-600 text-white font-semibold">Default MVP</span>
+                  <div class="text-xs text-blue-300 font-medium">Smooth Motion Tier</div>
+                  <div class="text-2xl font-bold text-white mt-1 font-mono" id="landingSmoothTotal">BDT 720</div>
+                  <div class="text-[11px] text-blue-200/80 mt-1">BDT 36 × <span class="landing-n">20</span> slides (Base + BDT 11/slide)</div>
+                </div>
+                <div class="p-4 rounded-xl bg-[#0d0f14] border border-[#1f232e] opacity-60">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-400">Cinematic Tier</span>
+                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-800 text-gray-400">Gated / Phase 5</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-400 mt-1 font-mono">Disabled in MVP</div>
+                  <div class="text-[11px] text-gray-500 mt-1">Unlocks after Phase 0 + first 5 paying clients</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-6 space-y-3">
+            <div class="text-xs font-mono uppercase text-gray-400">Implemented Landing Metadata</div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b]">
+                <span class="text-gray-400 block text-[10px]">Page Title (&lt;title&gt;)</span>
+                <span class="text-gray-200 font-mono">AI Presentation Platform | Professional PowerPoint Decks</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b]">
+                <span class="text-gray-400 block text-[10px]">Canonical &amp; Open Graph Title</span>
+                <span class="text-gray-200 font-mono">Create Professional Presentations with AI</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#090a0c] border border-[#1d212b]">
+                <span class="text-gray-400 block text-[10px]">Included Post-Delivery Policy</span>
+                <span class="text-gray-300">1 free motion swap included • Free re-render on tier upgrade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 2: DASHBOARD & PROJECT LIST                                  -->
+      <!-- =================================================================== -->
+      <section id="screen-dashboard" class="screen-section hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Projects Dashboard</h1>
+            <p class="text-xs text-gray-400 mt-0.5">Manage your presentation projects, free preview quotas, and delivered PowerPoint files.</p>
+          </div>
+          <button type="button" onclick="navigateScreen('intake')" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center gap-2 self-start">
+            <span>+ New Presentation Project</span>
+          </button>
+        </div>
+
+        <div class="htkis-panel rounded-xl p-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-1.5 flex-wrap" role="group" aria-label="Filter projects by tier">
+            <button type="button" onclick="setDashboardFilter('all')" data-filter="all" class="dash-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white">All Projects</button>
+            <button type="button" onclick="setDashboardFilter('smooth')" data-filter="smooth" class="dash-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-[#161920] text-gray-300 hover:text-white">Smooth Motion</button>
+            <button type="button" onclick="setDashboardFilter('static')" data-filter="static" class="dash-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-[#161920] text-gray-300 hover:text-white">Static Only</button>
+            <button type="button" onclick="setDashboardFilter('delivered')" data-filter="delivered" class="dash-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-[#161920] text-gray-300 hover:text-white">Delivered</button>
+          </div>
+          <div class="relative flex-1 max-w-xs">
+            <input aria-label="Search projects" id="dashboardSearchInput" type="search" oninput="renderDashboardProjects()" placeholder="Search title or design family..." aria-label="Search projects" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3 py-1.5 text-xs text-gray-100 placeholder-gray-500" />
+          </div>
+        </div>
+
+        <div class="flex gap-3"><button type="button" onclick="openShortlist()" class="px-3 py-2 rounded-lg bg-[#161920] text-sm">View shortlist</button><button type="button" onclick="setDashboardFilter('shortlisted')" class="px-3 py-2 rounded-lg bg-[#161920] text-sm">Shortlisted only</button></div><div id="dashboardProjectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 3: NEW PRESENTATION INPUT FLOW                               -->
+      <!-- =================================================================== -->
+      <section id="screen-intake" class="screen-section hidden space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-2xl font-bold text-white">New Presentation Project</h1>
+              <p class="text-xs text-gray-400 mt-0.5">Step 1 of 4: Configure content source and initial motion preference (`projects.motion_tier_requested`).</p>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded bg-blue-500/15 text-blue-300 border border-blue-500/30">
+              <span id="previewQuota">Demo preview quota: 2 of 2 remaining</span>
+            </span>
+          </div>
+
+          <form onsubmit="handleIntakeSubmit(event)" class="htkis-panel rounded-2xl p-6 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="intakeTitle" class="block text-xs font-medium text-gray-300 mb-1.5">Presentation Title</label>
+                <input id="intakeTitle" type="text" required value="Q4 Bangladesh Fintech Expansion" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3.5 py-2 text-sm text-white" />
+              </div>
+              <div>
+                <label for="intakeLanguage" class="block text-xs font-medium text-gray-300 mb-1.5">Slide Language Mode</label>
+                <select id="intakeLanguage" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3.5 py-2 text-sm text-white">
+                  <option value="bilingual">Bilingual (Bengali + English — Phase 0 Spec)</option>
+                  <option value="bn">Bengali Only (বাংলা)</option>
+                  <option value="en">English Only</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="intakeDesignFamily" class="block text-xs font-medium text-gray-300 mb-1.5">Design Family (Tone Recommendation Input)</label>
+                <select id="intakeDesignFamily" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3.5 py-2 text-sm text-white">
+                  <option value="corporate_slate">Corporate Slate (Recommends: fade, push)</option>
+                  <option value="startup_pulse">Startup Pulse (Recommends: zoom, wipe)</option>
+                  <option value="editorial_bengali">Editorial Bengali (Recommends: fade, wipe)</option>
+                </select>
+              </div>
+              <div>
+                <label for="intakeSlideCount" class="block text-xs font-medium text-gray-300 mb-1.5">Target Slide Count (Mock input)</label>
+                <input id="intakeSlideCount" type="number" min="4" max="50" value="8" onchange="updateIntakeMotionPreview()" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3.5 py-2 text-sm text-white font-mono" />
+              </div>
+            </div>
+
+            <div>
+              <label for="intakePrompt" class="block text-xs font-medium text-gray-300 mb-1.5">Presentation Topic / Structured Outline</label>
+              <textarea id="intakePrompt" rows="3" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg p-3 text-sm text-gray-200">8-slide bilingual executive deck covering fixed BDT 25/slide base pricing, BDT 11/slide Smooth motion tier, Open XML template safety, and Bengali conjunct rendering.</textarea>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#0c0e12] border border-[#222631] space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-mono uppercase text-blue-400">Confirmed Requirement FR-03</span>
+                  <h3 class="text-sm font-semibold text-white">Motion needed for desktop PowerPoint?</h3>
+                </div>
+                <span class="text-xs font-mono text-emerald-400" id="intakePriceHint">Estimated: BDT 288 (8 slides × BDT 36)</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="cursor-pointer">
+                  <input type="radio" name="motion_needed" value="smooth" checked onchange="setIntakeMotionTier('smooth')" class="sr-only peer" />
+                  <div class="p-3.5 rounded-xl border border-[#222631] peer-checked:border-blue-500 peer-checked:bg-blue-600/10 transition-all">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-semibold text-white">Yes — Smooth Motion (Default)</span>
+                      <span class="text-xs font-mono text-blue-300">+BDT 11/slide</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">1 deck-wide transition + automatic role-based entrances after you approve the static design.</p>
+                  </div>
+                </label>
+
+                <label class="cursor-pointer">
+                  <input type="radio" name="motion_needed" value="static" onchange="setIntakeMotionTier('static')" class="sr-only peer" />
+                  <div class="p-3.5 rounded-xl border border-[#222631] peer-checked:border-blue-500 peer-checked:bg-blue-600/10 transition-all">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-semibold text-white">No — Static Deck Only</span>
+                      <span class="text-xs font-mono text-gray-400">+BDT 0/slide</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">Base rate only (BDT 25/slide). Ideal for PDF handouts and print distribution.</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-xs text-gray-400">Demo uses fixed sample slide content; no AI or image generation is connected.</span>
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold">
+                Generate Free Static Preview →
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 4: STATIC SLIDE-IMAGE PREVIEW & DESIGN APPROVAL              -->
+      <!-- =================================================================== -->
+      <section id="screen-preview" class="screen-section hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-2xl font-bold text-white">Static Slide-Image Preview</h1>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">Static Images Only — No Motion Yet</span>
+            </div>
+            <p class="text-xs text-gray-400 mt-0.5">Review the 8-slide bilingual layout before configuring motion or locking your quote.</p>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <button type="button" onclick="requestPreviewRevision()" id="btnRevisionRound" class="px-3.5 py-2 rounded-xl bg-[#161920] hover:bg-[#1e222d] border border-[#2a3040] text-xs font-medium text-gray-200">
+              Request Revision (<span id="revisionQuotaText">2 of 2 free left</span>)
+            </button>
+            <button type="button" onclick="approveStaticDesign()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
+              Approve Design &amp; Continue →
+            </button>
+          </div>
+        </div>
+
+        <div id="staticPreviewGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 5: MOTION SELECTION WITH SAMPLE-CLIP PLACEHOLDERS            -->
+      <!-- =================================================================== -->
+      <section id="screen-motion" class="screen-section hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Motion Configuration (`POST /projects/:id/motion`)</h1>
+            <p class="text-xs text-gray-400 mt-0.5">Choose 1 deck-wide transition and 1 intensity level. AI handles role-based entrances using tested templates.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="navigateScreen('comparison')" class="px-3.5 py-2 rounded-xl bg-[#161920] border border-[#2a3040] text-xs text-gray-300 hover:text-white">
+              Compare Static vs Smooth
+            </button>
+            <button type="button" onclick="saveMotionAndGenerateQuote()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold">
+              Lock Motion &amp; Get Server Quote →
+            </button>
+          </div>
+        </div>
+
+        <div id="staticSkipBanner" class="hidden p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-between">
+          <div class="text-xs text-blue-200">
+            <strong>Static Tier Selected:</strong> Static decks skip transition and intensity configuration (`transition_id = null`, `intensity = null`). You can proceed directly to your BDT 25/slide quote or switch to Smooth below.
+          </div>
+          <button type="button" onclick="switchTierFromMotionScreen('smooth')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold">Enable Smooth (+BDT 11/slide)</button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 space-y-6">
+            <div class="htkis-panel rounded-2xl p-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-sm font-semibold text-white">1. Select Deck-Wide Transition (`allowed_transitions`)</h2>
+                  <p class="text-xs text-gray-400">AI-curated recommendations for <span id="motionFamilyLabel" class="text-blue-400 font-mono">corporate_slate</span> are highlighted.</p>
+                </div>
+                <span class="text-[11px] font-mono text-gray-400">1 transition applies to entire deck</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="transitionCardsContainer">
+              </div>
+            </div>
+
+            <div class="htkis-panel rounded-2xl p-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-sm font-semibold text-white">2. Select Motion Intensity (`intensity_scale`)</h2>
+                  <p class="text-xs text-gray-400">Controls entrance duration scaling in the Open XML `&lt;p:timing&gt;` patcher.</p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="intensityCardsContainer">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="htkis-panel rounded-2xl p-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-white">3-Second Sample Clip Preview</span>
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                  Simulated Placeholder
+                </span>
+              </div>
+
+              <div class="aspect-video rounded-xl bg-[#090a0c] border border-[#262b38] p-4 flex flex-col justify-between relative overflow-hidden" id="sampleClipStage">
+                <div class="flex items-center justify-between text-[10px] font-mono text-gray-400">
+                  <span id="stageClipLabel">Transition: fade • Intensity: standard (500ms)</span>
+                  <span>00:03.00</span>
+                </div>
+
+                <div id="stageSlideBody" class="my-auto space-y-2.5">
+                  <div id="stageTitleEl" class="p-2.5 rounded-lg bg-[#111317] border border-blue-500/40 text-xs font-bold text-white">
+                    প্রজেক্টের মূল লক্ষ্য ও সুবিধা (Role: title → fade)
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="p-2 rounded-lg bg-[#161922] border border-[#2a3042] text-[10px] text-gray-300">
+                      • স্থির বুলেট তালিকা<br/>• Smooth টিয়ারে বুলেট অ্যানিমেশন নেই
+                    </div>
+                    <div id="stageImageEl" class="p-2 rounded-lg bg-indigo-950/40 border border-indigo-500/40 text-[10px] text-indigo-200 flex items-center justify-center text-center">
+                      [Role: image → automatic entrance]
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-[#191c24]">
+                  <span class="text-[10px] text-gray-400">Requires real desktop PPT video capture</span>
+                  <button type="button" onclick="replaySampleStage()" class="px-2.5 py-1 rounded bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-[11px] font-medium">
+                    ↻ Replay 3s Sample
+                  </button>
+                </div>
+              </div>
+
+              <div class="space-y-2 pt-2">
+                <div class="text-xs font-semibold text-gray-200">AI Role-Based Entrance Policy (`v1.0.0-phase0`)</div>
+                <div class="text-[11px] space-y-1 text-gray-400 font-mono">
+                  <div class="flex justify-between py-1 border-b border-[#191c24]"><span>title / image</span><span class="text-emerald-400">fade (afterPrevious)</span></div>
+                  <div class="flex justify-between py-1 border-b border-[#191c24]"><span>quote / closing</span><span class="text-emerald-400">fade (configurable B-02)</span></div>
+                  <div class="flex justify-between py-1 border-b border-[#191c24]"><span>bullets / chart</span><span class="text-gray-500">None in Smooth</span></div>
+                  <div class="flex justify-between py-1"><span>Safety Cap</span><span class="text-amber-300">Max 5 / slide (&gt;6 bullets suppresses)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 6: STATIC VERSUS SMOOTH COMPARISON                           -->
+      <!-- =================================================================== -->
+      <section id="screen-comparison" class="screen-section hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Static vs. Smooth Motion Comparison</h1>
+            <p class="text-xs text-gray-400 mt-0.5">Clear explanation of tier deliverables, desktop compatibility, and post-delivery revision rights (FR-21).</p>
+          </div>
+          <button type="button" onclick="navigateScreen('motion')" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold">
+            Back to Motion Selection
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="htkis-panel rounded-2xl p-6 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-gray-800 text-gray-300">Static Tier</span>
+              <div class="text-3xl font-bold text-white font-mono">BDT <span class="rate-base-txt">25</span> <span class="text-sm font-normal text-gray-400">/ slide</span></div>
+              <p class="text-xs text-gray-400">Clean, print-ready slides without transitions or object animations.</p>
+              <ul class="text-xs space-y-2 text-gray-300 pt-2">
+                <li>✓ Full AI slide layout &amp; bilingual typography</li>
+                <li>✓ Zero `&lt;p:transition&gt;` or `&lt;p:timing&gt;` XML nodes</li>
+                <li>✓ Best for PDF email distribution &amp; printing</li>
+                <li>✓ Upgradeable to Smooth anytime for +BDT 11/slide</li>
+              </ul>
+            </div>
+            <button type="button" onclick="selectTierFromComparison('static')" class="w-full py-2.5 rounded-xl bg-[#161920] hover:bg-[#1f2430] border border-[#2a3040] text-xs font-semibold text-gray-200">
+              Select Static Tier
+            </button>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-6 border-2 border-blue-500/70 flex flex-col justify-between space-y-5 relative">
+            <span class="absolute -top-3 right-4 text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-semibold">Recommended Default</span>
+            <div class="space-y-3">
+              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-blue-500/15 text-blue-300">Smooth Motion Tier</span>
+              <div class="text-3xl font-bold text-white font-mono">BDT <span class="rate-smooth-total-txt">36</span> <span class="text-sm font-normal text-gray-400">/ slide</span></div>
+              <p class="text-xs text-blue-200/80">Base BDT <span class="rate-base-txt">25</span> + Smooth Motion BDT <span class="rate-smooth-txt">11</span> per slide.</p>
+              <ul class="text-xs space-y-2 text-gray-200 pt-2">
+                <li>✓ 1 curated deck-wide transition (`fade`, `wipe`, `push`, `zoom`)</li>
+                <li>✓ Role-based automatic entrances (`afterPrevious` trigger)</li>
+                <li>✓ Intensity control (`subtle`, `standard`, `dynamic`)</li>
+                <li>✓ 1 free post-delivery motion swap included</li>
+                <li>✓ Desktop PowerPoint compatibility pending</li>
+              </ul>
+            </div>
+            <button type="button" onclick="selectTierFromComparison('smooth')" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white">
+              Select Smooth Motion Tier
+            </button>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-6 opacity-65 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-purple-500/15 text-purple-300">Cinematic Tier</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30">Locked by Gate FR-24</span>
+              </div>
+              <div class="text-2xl font-bold text-gray-400 font-mono">Est. BDT 47–58 <span class="text-xs font-normal">/ slide</span></div>
+              <p class="text-xs text-gray-400">Provisional estimate only (not a sale price). Disabled until release gates pass.</p>
+              <ul class="text-xs space-y-2 text-gray-400 pt-2">
+                <li>• Presenter-click paragraph-by-paragraph bullet builds</li>
+                <li>• Staged chart wipes &amp; staggered object sequences</li>
+                <li>• Requires Phase 0 sign-off + 5 paying clients + cost study (recommended)</li>
+              </ul>
+            </div>
+            <button type="button" disabled class="w-full py-2.5 rounded-xl bg-[#14171f] border border-[#222631] text-xs font-semibold text-gray-500 cursor-not-allowed">
+              Unavailable in MVP
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 7: ITEMIZED PRICING & IMMUTABLE QUOTE CONFIRMATION           -->
+      <!-- =================================================================== -->
+      <section id="screen-quote" class="screen-section hidden space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-2xl font-bold text-white">Mock Quote (`POST /projects/:id/quote`)</h1>
+              <p class="text-xs text-gray-400 mt-0.5">Immutable rate snapshot locked at quote generation. Admin price changes will never alter this quote.</p>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30" id="quoteStatusBadge">
+              status: active (TTL 24h)
+            </span>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-6 space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#222631] gap-2">
+              <div>
+                <div class="text-xs font-mono text-gray-400" id="quoteIdDisplay">Quote ID: qt_20261026_9f8a2b</div>
+                <div class="text-lg font-bold text-white" id="quoteProjectTitle">Q4 Bangladesh Fintech Expansion (8 Slides)</div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-gray-400">Quote Expires At</div>
+                <div class="text-xs font-mono text-amber-300" id="quoteExpiryDisplay">2026-10-27 04:30:00 UTC</div>
+              </div>
+            </div>
+
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between py-2 border-b border-[#191c24]">
+                <div>
+                  <div class="text-gray-200 font-medium">Base Presentation Deck (<span id="quoteSlideCountA">8</span> slides × BDT <span id="quoteBaseRate">25</span>)</div>
+                  <div class="text-xs text-gray-400">AI layout, bilingual typography, static preview approval</div>
+                </div>
+                <div class="font-mono font-semibold text-gray-100" id="quoteBaseSubtotal">BDT 200</div>
+              </div>
+
+              <div class="flex justify-between py-2 border-b border-[#191c24]">
+                <div>
+                  <div class="text-gray-200 font-medium">Motion Line Item — <span id="quoteTierName" class="uppercase text-blue-400 font-mono">SMOOTH</span> (<span id="quoteSlideCountB">8</span> slides × BDT <span id="quoteMotionRate">11</span>)</div>
+                  <div class="text-xs text-gray-400" id="quoteMotionDesc">Transition: fade • Intensity: standard • Role-based entrances</div>
+                </div>
+                <div class="font-mono font-semibold text-blue-400" id="quoteMotionSubtotal">BDT 88</div>
+              </div>
+
+              <div class="flex justify-between py-2 border-b border-[#191c24] text-xs text-gray-400">
+                <span>VAT / Tax (Pending NBR BIN/VAT Accountant Confirmation — Blocker B-05)</span>
+                <span class="font-mono">BDT 0</span>
+              </div>
+
+              <div class="flex justify-between items-baseline pt-2">
+                <div>
+                  <span class="text-base font-bold text-white">Total Payable (Server Computed)</span>
+                  <span class="block text-[11px] font-mono text-gray-400" id="quotePaisaDisplay">Integer Minor Units: 28,800 paisa</span>
+                </div>
+                <div class="text-2xl font-bold text-emerald-400 font-mono" id="quoteTotalDisplay">BDT 288</div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#090a0c] border border-[#1d212b] space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-gray-400">
+                <span>Locked `design_specs.spec_json` Snapshot</span>
+                <span class="text-emerald-400">is_locked: true</span>
+              </div>
+              <pre id="quoteSpecJsonPre" class="text-[11px] font-mono text-blue-300 overflow-x-auto"></pre>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <button type="button" onclick="simulateQuoteExpiry()" class="px-3 py-2 rounded-lg bg-[#161920] hover:bg-[#1e222d] border border-[#2a3040] text-xs text-amber-300 font-mono">
+                [Test] Simulate Quote Expiry
+              </button>
+              <div class="flex items-center gap-2.5">
+                <button type="button" onclick="navigateScreen('motion')" class="px-4 py-2.5 rounded-xl bg-[#161920] text-gray-300 text-xs font-medium border border-[#2a3040]">
+                  Modify Motion (Re-Quote)
+                </button>
+                <button type="button" onclick="proceedToCheckout()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
+                  Confirm Quote &amp; Proceed to Checkout →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 8: CHECKOUT & SIMULATED WEBHOOK VERIFICATION                 -->
+      <!-- =================================================================== -->
+      <section id="screen-checkout" class="screen-section hidden space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
+            <div class="text-xs text-amber-200">
+              <strong>Simulated Sandbox Checkout:</strong> No live payment gateway is connected yet (Blocker B-05). Production entitlements are granted strictly via the simulated signed server webhook (`POST /webhooks/sslcommerz`), never from a client browser redirect.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="htkis-panel rounded-2xl p-6 space-y-4">
+              <h2 class="text-lg font-bold text-white">1. Bangladesh Payment Gateway (Sandbox)</h2>
+              <p class="text-xs text-gray-400">Session amount locked to mock quote <span id="checkoutAmountLabel" class="font-mono text-emerald-400 font-semibold">BDT 288</span>.</p>
+
+              <div class="space-y-2.5">
+                <label class="flex items-center justify-between p-3 rounded-xl border border-blue-500/50 bg-blue-600/10 cursor-pointer">
+                  <div class="flex items-center gap-2.5">
+                    <input type="radio" name="pay_method" checked class="accent-blue-500" />
+                    <div>
+                      <div class="text-xs font-semibold text-white">bKash / Nagad / Rocket via SSLCOMMERZ</div>
+                      <div class="text-[11px] text-gray-400">IPN Webhook + Server Order Validation API</div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-600 text-white">Recommended</span>
+                </label>
+              </div>
+
+              <div class="pt-3 border-t border-[#222631] space-y-2">
+                <div class="text-xs font-semibold text-gray-300">2. Trigger Payment &amp; Security Verification</div>
+                <button type="button" onclick="simulateVerifiedWebhookPayment()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
+                  ✓ Simulate Valid Signed IPN Webhook &amp; Grant Entitlement
+                </button>
+                <button type="button" onclick="simulateBrowserRedirectTamper()" class="w-full py-2 rounded-xl bg-[#161920] hover:bg-[#1e222d] border border-rose-500/30 text-rose-300 text-xs font-mono">
+                  ✗ [Security Test] Attempt Unverified Browser Redirect
+                </button>
+                <button type="button" onclick="simulateClientPriceTamper()" class="w-full py-2 rounded-xl bg-[#161920] hover:bg-[#1e222d] border border-amber-500/30 text-amber-300 text-xs font-mono">
+                  ✗ [Security Test] Submit Tampered Price (BDT 10)
+                </button>
+              </div>
+            </div>
+
+            <div class="htkis-panel rounded-2xl p-6 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-semibold text-white">Server Entitlement &amp; Webhook Log</span>
+                  <span class="text-[10px] font-mono text-gray-400" id="entitlementBadge">entitlement: NONE</span>
+                </div>
+                <div id="webhookConsoleLog" class="h-64 rounded-xl bg-[#090a0c] border border-[#1d212b] p-3 font-mono text-[11px] text-gray-300 overflow-y-auto space-y-1.5">
+                  <div class="text-gray-500">[server] Waiting for verified payment webhook...</div>
+                </div>
+              </div>
+
+              <button type="button" id="btnStartProductionAfterPay" onclick="startProductionJob()" disabled class="w-full py-2.5 rounded-xl bg-blue-600 disabled:bg-gray-800 disabled:text-gray-500 text-white text-xs font-semibold transition-colors">
+                Enqueue Production Job (`POST /projects/:id/produce`) →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 9: PRODUCTION PROGRESS, VALIDATION GATE & ERROR STATES       -->
+      <!-- =================================================================== -->
+      <section id="screen-production" class="screen-section hidden space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-2xl font-bold text-white">Asynchronous Production &amp; Validation Worker</h1>
+              <p class="text-xs text-gray-400 mt-0.5">Meaningful worker stages without fake percentage bars. Delivery is blocked if Open XML validation fails.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="simulateWorkerFailure()" class="px-3 py-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-mono">
+                [Test] Simulate XML Failure
+              </button>
+              <button type="button" onclick="runProductionPipelineSimulation()" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold">
+                ↻ Re-Run Worker Pipeline
+              </button>
+            </div>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-6 space-y-4" role="status" aria-live="polite">
+            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-3 border-b border-[#222631]">
+              <span>Job ID: job_20261026_opc01</span>
+              <span id="jobCurrentStatusText" class="text-blue-400">status: validating</span>
+            </div>
+
+            <div id="workerStagesList" class="space-y-2.5">
+            </div>
+
+            <div id="workerFailureBox" class="hidden p-4 rounded-xl bg-rose-500/10 border border-rose-500/40 space-y-2">
+              <div class="text-xs font-bold text-rose-300">Delivery Blocked — Package Quarantine Triggered (FR-20)</div>
+              <p class="text-xs text-rose-200/90 font-mono" id="workerFailureReason">
+                Validation Error: ppt/slides/slide5.xml contains unapproved animation target spid='999'. File quarantined.
+              </p>
+              <div class="flex items-center gap-2 pt-1">
+                <button type="button" onclick="runProductionPipelineSimulation()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-semibold">
+                  Safe Idempotent Retry
+                </button>
+                <button type="button" onclick="fallbackToStaticDelivery()" class="px-3 py-1.5 rounded-lg bg-[#161920] border border-[#2a3040] text-gray-200 text-xs">
+                  View simulated Static fallback
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="htkis-panel rounded-2xl p-5 space-y-2">
+            <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+              <span>Recorded `jobs.animation_choices` Audit Log (FR-19)</span>
+              <span>policy_version: 1.0.0-phase0</span>
+            </div>
+            <pre id="jobAnimationChoicesPre" class="text-[11px] font-mono text-emerald-300 bg-[#090a0c] p-3.5 rounded-xl border border-[#1d212b] max-h-60 overflow-y-auto"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 10: FINAL PRESENTATION DOWNLOAD & POST-DELIVERY REVISIONS    -->
+      <!-- =================================================================== -->
+      <section id="screen-download" class="screen-section hidden space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="htkis-panel rounded-2xl p-6 space-y-5 border-emerald-500/40">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  Simulated delivery screen
+                </span>
+                <h1 class="text-2xl font-bold text-white mt-2">Demo delivery state — no customer PPTX generated</h1>
+                <p class="text-xs text-gray-400 mt-0.5">Motion is built for desktop Microsoft PowerPoint (Windows &amp; Mac).</p>
+              </div>
+              <div class="text-right font-mono text-xs text-amber-300">
+                Private signed downloads: not connected
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#090a0c] border border-[#222631] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <div class="text-sm font-semibold text-white font-mono" id="downloadFilenameDisplay">phase0_smooth_fade_standard.pptx</div>
+                <div class="text-xs text-gray-400">Illustrative slide XML only • Not a complete or validated PPTX</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="downloadSlideXmlBundle()" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold">
+                  Download Open XML Slide Spec (.xml)
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-[#222631]">
+              <div class="p-4 rounded-xl htkis-card space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-white">Post-Delivery Motion Swap (FR-22)</span>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/15 text-blue-300" id="freeSwapBadge">1 Free Swap Available</span>
+                </div>
+                <p class="text-xs text-gray-400">Change your deck transition or intensity once for free without re-paying.</p>
+                <button type="button" onclick="triggerFreeMotionSwap()" class="px-3 py-1.5 rounded-lg bg-[#111317] hover:bg-[#191d26] border border-[#2a3040] text-xs text-blue-300 font-medium">
+                  Use 1 Free Motion Swap →
+                </button>
+              </div>
+
+              <div class="p-4 rounded-xl htkis-card space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-white">Tier Upgrade Policy (FR-23)</span>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">Free Re-Render</span>
+                </div>
+                <p class="text-xs text-gray-400">Static orders can upgrade to Smooth by paying only the BDT 11/slide difference.</p>
+                <button type="button" onclick="navigateScreen('motion')" class="px-3 py-1.5 rounded-lg bg-[#111317] hover:bg-[#191d26] border border-[#2a3040] text-xs text-gray-200 font-medium">
+                  Review Tier Options
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 11: ACCOUNT SETTINGS & ORDER HISTORY                         -->
+      <!-- =================================================================== -->
+      <section id="screen-account" class="screen-section hidden space-y-6">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Account Settings, Quotas &amp; Order History</h1>
+          <p class="text-xs text-gray-400 mt-0.5">Server-enforced preview caps and immutable BDT payment receipts.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="htkis-panel rounded-xl p-4">
+            <div class="text-xs text-gray-400">Authenticated User</div>
+            <div class="text-sm font-semibold text-white mt-1">lead.architect@dhaka-enterprise.bd</div>
+            <div class="text-[11px] font-mono text-emerald-400 mt-1">Role: Owner + Admin</div>
+          </div>
+          <div class="htkis-panel rounded-xl p-4">
+            <div class="text-xs text-gray-400">Free Preview Projects Quota (FR-05)</div>
+            <div class="text-lg font-bold text-white mt-1 font-mono">1 / 2 Used</div>
+            <div class="text-[11px] text-gray-400 mt-1">Demo counter only; server enforcement not connected</div>
+          </div>
+          <div class="htkis-panel rounded-xl p-4">
+            <div class="text-xs text-gray-400">Preview Revisions Per Project (FR-05)</div>
+            <div class="text-lg font-bold text-white mt-1 font-mono" id="accountRevisionStat">0 / 2 Used</div>
+            <div class="text-[11px] text-gray-400 mt-1">Resets per new project</div>
+          </div>
+        </div>
+
+        <div class="htkis-panel rounded-2xl p-6 space-y-4">
+          <h2 class="text-sm font-semibold text-white">Immutable Quote &amp; Order History</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="text-gray-400 border-b border-[#222631] font-mono">
+                <tr>
+                  <th class="py-2">Order / Quote ID</th>
+                  <th class="py-2">Project</th>
+                  <th class="py-2">Tier</th>
+                  <th class="py-2">Snapshot Rate</th>
+                  <th class="py-2">Total Paid</th>
+                  <th class="py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody id="orderHistoryTableBody" class="divide-y divide-[#191c24] font-mono">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 12: ADMINISTRATIVE PRICING, AUDIT LOG & JOB MONITOR          -->
+      <!-- =================================================================== -->
+      <section id="screen-admin" class="screen-section hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Administrative Pricing &amp; Policy Console</h1>
+            <p class="text-xs text-gray-400 mt-0.5">Update demo rates (`PUT /admin/pricing`). Changes apply only to new quotes and write to `audit_logs`.</p>
+          </div>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+            Demo admin view — no authentication
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <form onsubmit="handleAdminPriceUpdate(event)" class="htkis-panel rounded-2xl p-6 space-y-4">
+            <h2 class="text-sm font-semibold text-white">1. Server Rate Configuration (`price_configs`)</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="adminBaseRateInput" class="block text-xs text-gray-300 mb-1">Base Rate per Slide (BDT)</label>
+                <input id="adminBaseRateInput" type="number" min="10" max="500" value="25" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3 py-2 text-sm text-white font-mono" />
+              </div>
+              <div>
+                <label for="adminSmoothRateInput" class="block text-xs text-gray-300 mb-1">Smooth Motion Fee per Slide (BDT)</label>
+                <input id="adminSmoothRateInput" type="number" min="0" max="500" value="11" class="w-full bg-[#090a0c] border border-[#222631] rounded-lg px-3 py-2 text-sm text-white font-mono" />
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#090a0c] border border-[#222631] flex items-center justify-between">
+              <div>
+                <div class="text-xs font-semibold text-gray-200">Cinematic Tier Release Gate (FR-24)</div>
+                <div class="text-[11px] text-gray-400">Paying Clients Count: <span class="font-mono text-amber-300">2 / 5 required</span> • Phase 0 Desktop QA: <span class="font-mono text-amber-300">Pending</span></div>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-1 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30">LOCKED</span>
+            </div>
+
+            <button type="submit" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold">
+              Save New Pricing Version &amp; Append Audit Log
+            </button>
+          </form>
+
+          <div class="htkis-panel rounded-2xl p-6 space-y-3">
+            <h2 class="text-sm font-semibold text-white">2. Append-Only Administrative Audit Trail (`audit_logs`)</h2>
+            <p class="text-xs text-gray-400">Notice that existing locked quotes retain their original BDT 25 / BDT 11 snapshot even after you edit rates.</p>
+            <div id="adminAuditLogContainer" class="space-y-2 max-h-60 overflow-y-auto font-mono text-[11px]">
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Accessible PWA Installation Guidance Modal (FR-01) -->
+  <div id="pwaInstallModal" role="dialog" aria-modal="true" aria-labelledby="pwaModalTitle" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="htkis-panel rounded-2xl max-w-lg w-full p-6 space-y-4 border border-[#2e3446]">
+      <div class="flex items-center justify-between">
+        <h2 id="pwaModalTitle" class="text-lg font-bold text-white">Install AI Presentation Platform (PWA)</h2>
+        <button type="button" onclick="closePwaInstallModal()" aria-label="Close modal" class="text-gray-400 hover:text-white text-sm font-mono">✕</button>
+      </div>
+      <p class="text-xs text-gray-300 leading-relaxed">
+        This prototype has a PWA manifest and local assets. Installation and offline behavior require browser verification over HTTPS. There is no account synchronization or private server storage connected.
+      </p>
+      <div class="space-y-2 text-xs">
+        <div class="p-3 rounded-xl bg-[#090a0c] border border-[#1d212b]">
+          <strong class="text-blue-400 block">Chrome / Edge (Windows &amp; macOS)</strong>
+          Click the install icon in the address bar or choose <em>Install AI Presentation Platform</em> from the browser menu.
+        </div>
+        <div class="p-3 rounded-xl bg-[#090a0c] border border-[#1d212b]">
+          <strong class="text-emerald-400 block">Safari (macOS Sonoma &amp; iOS)</strong>
+          Choose <em>File → Add to Dock</em> on macOS or <em>Share → Add to Home Screen</em> on iOS.
+        </div>
+        <div class="p-3 rounded-xl bg-[#090a0c] border border-[#1d212b]">
+          <strong class="text-amber-300 block">Firefox &amp; Standard Browsers</strong>
+          Full responsive web support works directly in the browser without requiring manifest installation.
+        </div>
+      </div>
+      <div class="flex justify-end pt-2">
+        <button type="button" onclick="closePwaInstallModal()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" role="status" aria-live="polite" class="fixed bottom-4 right-4 z-50 hidden px-4 py-3 rounded-xl bg-[#161922] border border-blue-500/50 text-xs text-gray-100 shadow-2xl"></div>
+
+  <script src="./evidence.js" defer></script>
+  <script src="./prototype.js" defer></script>
+  <script src="./accessibility.js" defer></script>
+<div id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center p-4"><div class="htkis-panel rounded-2xl p-6 w-full max-w-2xl"><div class="flex justify-between gap-4"><h2 id="detailTitle" class="text-xl font-bold">Details</h2><button type="button" onclick="closeDetail()" aria-label="Close details">Close</button></div><div id="detailContent" class="space-y-3 mt-4"></div></div></div></body>
+</html>

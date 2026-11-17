@@ -1,0 +1,47 @@
+{
+  "name": "ai-presentation-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Presentation Platform: server-authoritative pricing/production backend, Phase 0 PowerPoint Open XML engine, and frontend prototype.",
+  "scripts": {
+    "test:backend": "tsx server/test-backend.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:frontend": "npm --prefix frontend test",
+    "lint:frontend": "npm --prefix frontend run lint",
+    "build:frontend": "npm --prefix frontend run build",
+    "dev:api": "tsx watch server/http/server.ts",
+    "start:api": "tsx server/http/server.ts",
+    "test:api": "tsx server/http/test-live-integration.ts",
+    "test:production": "tsx server/http/test-production-pipeline.ts",
+    "test:journey": "tsx server/http/test-checkout-webhook.ts",
+    "start:worker": "tsx server/http/worker.ts",
+    "test:worker": "tsx server/http/test-worker-recovery.ts",
+    "demo:pay": "tsx server/http/demo-trigger-payment.ts",
+    "test:jobs:local": "node server/test-local-jobs.mjs",
+    "test:rate-limit": "node --import tsx --test server/http/rate-limit.test.ts",
+    "test:preview:local": "tsx server/test-preview-renderer.ts",
+    "build:release": "node scripts/build-release.mjs",
+    "test:release": "npm run build:release && node scripts/test-release.mjs",
+    "build:api": "node scripts/build-api.mjs",
+    "build:vercel": "npm run build:api && npm run build:frontend"
+  },
+  "dependencies": {
+    "@heyputer/puter.js": "^2.6.5",
+    "@supabase/supabase-js": "^2.47.10",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.5",
+    "@types/pg": "^8.11.10",
+    "dotenv": "^16.4.7",
+    "esbuild": "0.28.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

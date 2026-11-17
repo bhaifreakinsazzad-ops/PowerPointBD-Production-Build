@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Presentation Platform — Live Backend Demo</title>
+<style>
+  :root {
+    --bg: #090a0c; --panel: #111317; --panel-elevated: #161920; --border: #222631;
+    --text-primary: #f3f4f6; --text-secondary: #9ca3af; --accent: #3b82f6;
+    --emerald: #10b981; --amber: #f59e0b; --rose: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text-primary);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    margin: 0; padding: 24px 16px 60px; line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .banner {
+    background: #1a1306; border: 1px solid var(--amber); color: var(--amber);
+    padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 20px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 15px; margin: 0 0 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+  label { display: block; font-size: 13px; color: var(--text-secondary); margin: 10px 0 4px; }
+  input, select {
+    width: 100%; background: var(--panel-elevated); border: 1px solid var(--border);
+    color: var(--text-primary); padding: 9px 10px; border-radius: 6px; font-size: 14px;
+  }
+  input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button {
+    background: var(--accent); color: white; border: none; padding: 10px 16px;
+    border-radius: 6px; font-size: 14px; cursor: pointer; margin-top: 12px; margin-right: 8px;
+  }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.secondary { background: var(--panel-elevated); border: 1px solid var(--border); color: var(--text-primary); }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; }
+  .status { font-size: 13px; padding: 8px 10px; border-radius: 6px; margin-top: 10px; }
+  .status.ok { background: #06201a; color: var(--emerald); border: 1px solid var(--emerald); }
+  .status.err { background: #2a0e0e; color: var(--rose); border: 1px solid var(--rose); }
+  .status.pending { background: #1a1306; color: var(--amber); border: 1px solid var(--amber); }
+  pre { background: #050607; border: 1px solid var(--border); padding: 10px; border-radius: 6px; font-size: 12px; overflow: auto; max-height: 160px; }
+  .muted { color: var(--text-secondary); font-size: 13px; }
+  a.btn-link { color: var(--accent); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>AI Presentation Platform — Live Backend Demo</h1>
+  <div class="banner">
+    This page calls the REAL HTTP API against the live Supabase database — not mock data.
+    Payment is a labeled sandbox provider (mock_sandbox), not a real SSLCOMMERZ/bKash integration.
+    Slide content is placeholder text (no AI provider connected yet).
+  </div>
+
+  <div class="card" id="auth-card">
+    <h2>1. Sign in</h2>
+    <p class="muted">Development fixture only. Enter credentials supplied for your isolated local test environment; do not publish a development build.</p>
+    <label>Email</label>
+    <input id="email" type="email" autocomplete="username" />
+    <label>Password</label>
+    <input id="password" type="password" autocomplete="current-password" />
+    <button id="sign-in-btn">Sign in</button>
+    <div id="auth-status" class="status hidden"></div>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="card">
+      <h2>2. Create a project</h2>
+      <div class="row">
+        <div><label>Title</label><input id="title" value="Q4 Board Deck" /></div>
+        <div><label>Slide count</label><input id="slide-count" type="number" value="8" min="1" max="100" /></div>
+      </div>
+      <button id="create-project-btn">Create project</button>
+      <div id="create-status" class="status hidden"></div>
+    </div>
+
+    <div class="card hidden" id="project-card">
+      <h2>3. Configure motion (Static only — Smooth is blocked pending desktop PowerPoint QA)</h2>
+      <p class="muted">Project: <span id="project-id"></span></p>
+      <button id="configure-motion-btn">Configure Static motion</button>
+      <div id="motion-status" class="status hidden"></div>
+    </div>
+
+    <div class="card hidden" id="quote-card">
+      <h2>4. Get a server-computed quote</h2>
+      <button id="get-quote-btn">Get quote</button>
+      <div id="quote-status" class="status hidden"></div>
+      <pre id="quote-detail" class="hidden"></pre>
+    </div>
+
+    <div class="card hidden" id="checkout-card">
+      <h2>5. Checkout (sandbox)</h2>
+      <button id="checkout-btn">Create checkout session</button>
+      <div id="checkout-status" class="status hidden"></div>
+      <p class="muted hidden" id="webhook-hint">
+        Waiting for the payment provider's webhook… In this sandbox demo, trigger it from a terminal:
+        <code>npm run demo:pay -- &lt;provider_session_id&gt; &lt;quote_amount_bdt&gt;</code>
+      </p>
+    </div>
+
+    <div class="card hidden" id="produce-card">
+      <h2>6. Produce</h2>
+      <button id="produce-btn">Produce presentation</button>
+      <div id="produce-status" class="status hidden"></div>
+    </div>
+
+    <div class="card hidden" id="download-card">
+      <h2>7. Download</h2>
+      <button id="download-btn">Get signed download link</button>
+      <div id="download-status" class="status hidden"></div>
+      <a id="download-link" class="btn-link hidden" target="_blank" rel="noopener">Download the real .pptx →</a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.10/+esm';
+
+  const SUPABASE_URL = 'https://mnigcwueptvnfqrrszyd.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_eGnzw4wAz_quanGfWi8dZg_wYpLwuc7';
+  const API_BASE = 'http://localhost:8787';
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let accessToken = null;
+  let state = { projectId: null, quoteId: null, quoteAmount: null, providerSessionId: null };
+
+  const $ = (id) => document.getElementById(id);
+  function show(el) { el.classList.remove('hidden'); }
+  function setStatus(el, kind, text) {
+    el.className = 'status ' + kind;
+    el.textContent = text;
+  }
+  async function api(path, init = {}) {
+    const res = await fetch(API_BASE + path, {
+      ...init,
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}`, ...init.headers },
+    });
+    const body = await res.json();
+    if (!res.ok) throw Object.assign(new Error(body?.error?.message || res.statusText), { body, status: res.status });
+    return body;
+  }
+
+  $('sign-in-btn').onclick = async () => {
+    const statusEl = $('auth-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Signing in…');
+    const { data, error } = await supabase.auth.signInWithPassword({ email: $('email').value, password: $('password').value });
+    if (error) { setStatus(statusEl, 'err', error.message); return; }
+    accessToken = data.session.access_token;
+    setStatus(statusEl, 'ok', `Signed in as ${data.user.email}`);
+    show($('app'));
+  };
+
+  $('create-project-btn').onclick = async () => {
+    const statusEl = $('create-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Creating project…');
+    try {
+      const res = await api('/projects', {
+        method: 'POST',
+        body: JSON.stringify({ title: $('title').value, slide_count: Number($('slide-count').value), motion_tier_requested: 'static' }),
+      });
+      state.projectId = res.data.project.id;
+      $('project-id').textContent = state.projectId;
+      setStatus(statusEl, 'ok', 'Project created.');
+      show($('project-card'));
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+  };
+
+  $('configure-motion-btn').onclick = async () => {
+    const statusEl = $('motion-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Configuring…');
+    try {
+      await api(`/projects/${state.projectId}/motion`, {
+        method: 'POST',
+        body: JSON.stringify({ motion_tier: 'static', transition_id: null, intensity: null }),
+      });
+      setStatus(statusEl, 'ok', 'Static motion configured (zero animation by definition).');
+      show($('quote-card'));
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+  };
+
+  $('get-quote-btn').onclick = async () => {
+    const statusEl = $('quote-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Requesting quote…');
+    try {
+      const res = await api(`/projects/${state.projectId}/quote`, { method: 'POST', body: '{}' });
+      const q = res.data.quote;
+      state.quoteId = q.id; state.quoteAmount = q.quote_amount;
+      setStatus(statusEl, 'ok', `Quote: BDT ${q.quote_amount} (server-computed, expires ${new Date(q.expires_at).toLocaleString()})`);
+      const detail = $('quote-detail'); show(detail); detail.textContent = JSON.stringify(q.quote_breakdown, null, 2);
+      show($('checkout-card'));
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+  };
+
+  $('checkout-btn').onclick = async () => {
+    const statusEl = $('checkout-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Creating checkout session…');
+    try {
+      const res = await api('/checkout/session', {
+        method: 'POST',
+        body: JSON.stringify({ quote_id: state.quoteId, idempotency_key: `demo_${Date.now()}` }),
+      });
+      state.providerSessionId = res.data.payment.provider_session_id;
+      setStatus(statusEl, 'pending', `Payment pending. Session: ${state.providerSessionId}`);
+      show($('webhook-hint'));
+      pollForEntitlement();
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+  };
+
+  async function pollForEntitlement() {
+    const statusEl = $('checkout-status');
+    const poll = async () => {
+      try {
+        const res = await api(`/projects/${state.projectId}/status`);
+        if (res.data.project_state === 'paid') {
+          setStatus(statusEl, 'ok', 'Payment verified — entitlement granted.');
+          show($('produce-card'));
+          return;
+        }
+      } catch {}
+      setTimeout(poll, 2000);
+    };
+    poll();
+  }
+
+  $('produce-btn').onclick = async () => {
+    const statusEl = $('produce-status'); show(statusEl);
+    const button = $('produce-btn');
+    button.disabled = true;
+    setStatus(statusEl, 'pending', 'Queueing production…');
+    try {
+      const projectId = state.projectId;
+      const existing = (await api(`/projects/${projectId}/status`)).data.job;
+      let job = existing;
+      if (!job || !['queued', 'running', 'failed'].includes(job.status)) {
+        try {
+          job = (await api(`/projects/${projectId}/produce`, { method: 'POST', body: JSON.stringify({ idempotency_key: `demo_produce_${Date.now()}` }) })).data.job;
+        } catch (error) {
+          if (error.body?.error?.code !== 'PRODUCTION_ALREADY_PENDING') throw error;
+          job = (await api(`/projects/${projectId}/status`)).data.job;
+        }
+      }
+      if (!job) throw new Error('No production job is available. Try again.');
+      const jobId = job.id;
+      const deadline = Date.now() + 180000;
+      while (Date.now() < deadline && state.projectId === projectId) {
+        const status = await api(`/projects/${projectId}/status`);
+        const job = status.data.job;
+        if (!job || job.id !== jobId) throw new Error('Production status changed. Refresh the project to resume.');
+        if (job.status === 'completed') {
+          setStatus(statusEl, 'ok', 'Demo deck ready. Slide content is placeholder text; AI content generation is not connected.');
+          show($('download-card'));
+          return;
+        }
+        if (job.status === 'quarantined') throw new Error('Production failed after its retry limit. Contact support.');
+        setStatus(statusEl, 'pending', `Job ${job.status}: ${job.progress_stage}. A detached worker must be running.`);
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+      }
+      setStatus(statusEl, 'pending', 'Production is still pending. Use Produce presentation to resume status checks.');
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+    finally { button.disabled = false; }
+  };
+
+  $('download-btn').onclick = async () => {
+    const statusEl = $('download-status'); show(statusEl);
+    setStatus(statusEl, 'pending', 'Requesting signed URL…');
+    try {
+      const res = await api(`/projects/${state.projectId}/download`);
+      setStatus(statusEl, 'ok', `${res.data.filename} — ${res.data.size_bytes} bytes — expires in ${res.data.expires_in_seconds}s`);
+      const link = $('download-link'); show(link); link.href = res.data.download_url; link.textContent = `Download ${res.data.filename} →`;
+    } catch (e) { setStatus(statusEl, 'err', e.message); }
+  };
+</script>
+</body>
+</html>

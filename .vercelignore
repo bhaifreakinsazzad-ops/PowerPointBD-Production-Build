@@ -1,0 +1,19 @@
+# Not needed by the Vercel web/API deployment. Excluding engine/ also stops
+# Vercel from detecting engine/requirements.txt and running a Python (uv)
+# install, which produced the "Failed to hardlink files" warning. The Python
+# renderer and durable worker run on a separate persistent host.
+engine/
+artifacts/
+phase0_artifacts/
+plugins/
+dist/
+docs/
+db/
+.anchor/
+.claude/
+.storage/
+frontend/tests/
+frontend/playwright-report/
+frontend/.test-output/
+.env
+.env.local

@@ -1,0 +1,14 @@
+<templates xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" version="v1" status="experimental-not-desktop-approved">
+ <effect id="fade" preset_id="10">
+  <p:animEffect transition="in" filter="fade"><p:cBhvr><p:cTn id="0" dur="500" fill="hold"/><p:tgtEl><p:spTgt spid="0"/></p:tgtEl></p:cBhvr></p:animEffect>
+ </effect>
+ <effect id="wipe" preset_id="22">
+  <p:animEffect transition="in" filter="wipe(right)"><p:cBhvr><p:cTn id="0" dur="500" fill="hold"/><p:tgtEl><p:spTgt spid="0"/></p:tgtEl></p:cBhvr></p:animEffect>
+ </effect>
+ <effect id="zoom" preset_id="23">
+  <p:animScale zoomContents="1"><p:cBhvr><p:cTn id="0" dur="500" fill="hold"/><p:tgtEl><p:spTgt spid="0"/></p:tgtEl></p:cBhvr><p:from x="0" y="0"/><p:to x="100000" y="100000"/></p:animScale>
+ </effect>
+ <effect id="slide_in" preset_id="2">
+  <p:animMotion origin="layout" path="M 0 1 L 0 0 E" pathEditMode="relative" rAng="0"><p:cBhvr><p:cTn id="0" dur="500" fill="hold"/><p:tgtEl><p:spTgt spid="0"/></p:tgtEl></p:cBhvr></p:animMotion>
+ </effect>
+</templates>
