@@ -93,7 +93,7 @@ export function convertBijoyToUnicode(src: string): string {
   // Convert individual characters
   let output = '';
   for (let i = 0; i < text.length; i++) {
-    const char = text[i];
+    const char = text[i] ?? '';
     output += bijoyMap[char] !== undefined ? bijoyMap[char] : char;
   }
 

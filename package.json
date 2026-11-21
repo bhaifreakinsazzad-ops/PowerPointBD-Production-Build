@@ -4,7 +4,14 @@
   "private": true,
   "type": "module",
   "description": "AI Presentation Platform: server-authoritative pricing/production backend, Phase 0 PowerPoint Open XML engine, and frontend prototype.",
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
+    "dev": "tsx server/http/server.ts",
+    "build": "npm run build:frontend && npm run typecheck",
+    "start": "tsx server/http/server.ts",
+    "lint": "npm run typecheck && npm --prefix frontend run typecheck:studio && npm run lint:frontend",
     "test:backend": "tsx server/test-backend.mjs",
     "typecheck": "tsc --noEmit",
     "test:frontend": "npm --prefix frontend test",
@@ -30,7 +37,8 @@
     "@heyputer/puter.js": "^2.6.5",
     "@supabase/supabase-js": "^2.47.10",
     "express": "^4.21.2",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "pptxgenjs": "^4.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

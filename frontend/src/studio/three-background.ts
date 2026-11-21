@@ -122,11 +122,21 @@ export function initThreeBackground(canvasContainer: HTMLElement): ThreeBackgrou
   }
   window.addEventListener('resize', onResize);
 
-  let animationFrameId: number;
-  let clock = new THREE.Clock();
+  // Detect software WebGL (SwiftShader / llvmpipe) to avoid stalling CPU-only browsers
+  let isSoftwareGl = false;
+  try {
+    const gl = renderer.getContext();
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    const rendererStr = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '') : '';
+    isSoftwareGl = /swiftshader|llvmpipe|software|mesa/i.test(rendererStr);
+  } catch {
+    isSoftwareGl = false;
+  }
 
-  function animate() {
-    animationFrameId = requestAnimationFrame(animate);
+  let animationFrameId: number | null = null;
+  const clock = new THREE.Clock();
+
+  function renderFrame() {
     const elapsedTime = clock.getElapsedTime();
 
     // Lerp mouse
@@ -135,9 +145,11 @@ export function initThreeBackground(canvasContainer: HTMLElement): ThreeBackgrou
 
     // Gentle float on cards
     cards.forEach((card, i) => {
-      card.position.y += Math.sin(elapsedTime * 1.2 + i * 1.5) * 0.005;
+      const base = cardPositions[i];
+      if (!base) return;
+      card.position.y = base.y + Math.sin(elapsedTime * 1.2 + i * 1.5) * 0.15;
       card.rotation.x = targetY * 0.15;
-      card.rotation.y = cardPositions[i].rotY + targetX * 0.2;
+      card.rotation.y = base.rotY + targetX * 0.2;
     });
 
     // Slow particles rotation
@@ -147,11 +159,20 @@ export function initThreeBackground(canvasContainer: HTMLElement): ThreeBackgrou
     renderer.render(scene, camera);
   }
 
-  animate();
+  function animate() {
+    animationFrameId = requestAnimationFrame(animate);
+    renderFrame();
+  }
+
+  if (isSoftwareGl) {
+    renderFrame();
+  } else {
+    animate();
+  }
 
   return {
     destroy() {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
       renderer.dispose();
@@ -162,6 +183,7 @@ export function initThreeBackground(canvasContainer: HTMLElement): ThreeBackgrou
     setAccentColor(hex: string) {
       dirLight.color.set(hex);
       particleMat.color.set(hex);
+      if (isSoftwareGl) renderFrame();
     },
   };
 }

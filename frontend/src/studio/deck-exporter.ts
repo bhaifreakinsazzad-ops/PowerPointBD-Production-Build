@@ -182,7 +182,7 @@ export async function exportToPptx(options: DeckExportOptions): Promise<void> {
         // Timeline Layout
         slideData.items.forEach((item, i) => {
           const rowY = 2.0 + i * 0.9;
-          slide.addShape(pptx.ShapeType.oval, {
+          slide.addShape(pptx.ShapeType.ellipse, {
             x: 0.8,
             y: rowY + 0.05,
             w: 0.35,

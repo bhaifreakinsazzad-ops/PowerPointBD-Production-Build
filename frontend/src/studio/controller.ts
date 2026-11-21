@@ -1155,8 +1155,9 @@ export function mountStudio() {
         tab.classList.add('active');
         const num = Number((tab as HTMLElement).dataset.slide || 1);
         const titleRender = document.getElementById('preview-title-render');
-        if (titleRender && state.slides[num - 1]) {
-          titleRender.textContent = state.slides[num - 1].title;
+        const activeSlide = state.slides[num - 1];
+        if (titleRender && activeSlide) {
+          titleRender.textContent = activeSlide.title;
         }
       });
     });

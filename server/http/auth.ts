@@ -4,7 +4,10 @@ import { env } from './env.ts';
 import { ApiError } from './errors.ts';
 import { withUserContext } from './db.ts';
 
-const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
+const supabase =
+  env.SUPABASE_URL && env.SUPABASE_ANON_KEY
+    ? createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
+    : null;
 
 export interface AuthenticatedUser {
   id: string;
@@ -31,6 +34,9 @@ declare global {
  */
 export async function requireAuth(req: Request, _res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!supabase) {
+      throw new ApiError(503, 'AUTH_NOT_CONFIGURED', 'Supabase Auth is not configured in this environment.');
+    }
     const header = req.header('authorization') ?? '';
     const token = header.startsWith('Bearer ') ? header.slice('Bearer '.length) : null;
     if (!token) {

@@ -4,7 +4,7 @@
  */
 
 import { animate as animeAnimate, stagger } from 'animejs';
-import { animate as motionAnimate, spring } from 'motion';
+import { animate as motionAnimate } from 'motion';
 
 export function animateNumber(
   element: HTMLElement,
@@ -22,7 +22,7 @@ export function animateNumber(
       const rounded = Math.round(obj.val);
       // Bengali numeral converter for aesthetic BDT figures
       const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-      const bnStr = String(rounded).replace(/[0-9]/g, d => bnDigits[Number(d)]);
+      const bnStr = String(rounded).replace(/[0-9]/g, d => bnDigits[Number(d)] ?? d);
       element.textContent = `${prefix}${bnStr}${suffix}`;
     },
   });
@@ -36,7 +36,7 @@ export function animateScreenEnter(element: HTMLElement): void {
   motionAnimate(
     element,
     { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
-    { duration: 0.35, easing: spring({ stiffness: 350, damping: 25 }) }
+    { duration: 0.35, type: 'spring', stiffness: 350, damping: 25 }
   );
 }
 
